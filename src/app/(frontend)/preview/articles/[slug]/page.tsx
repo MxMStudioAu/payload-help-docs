@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { RichText } from '@payloadcms/richtext-lexical/react'
