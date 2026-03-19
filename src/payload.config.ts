@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import {
   lexicalEditor,
   FixedToolbarFeature,
@@ -79,5 +80,13 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
+  ],
 })
