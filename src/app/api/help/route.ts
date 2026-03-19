@@ -1,6 +1,17 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+}
+
+// Handle preflight requests
+export const OPTIONS = async () => {
+  return new Response(null, { status: 204, headers: corsHeaders })
+}
+
 export const GET = async () => {
   const payload = await getPayload({ config: configPromise })
 
@@ -45,5 +56,5 @@ export const GET = async () => {
     }),
   )
 
-  return Response.json(categoriesWithArticles)
+  return Response.json(categoriesWithArticles, { headers: corsHeaders })
 }
