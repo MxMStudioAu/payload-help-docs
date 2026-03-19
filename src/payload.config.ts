@@ -43,6 +43,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    livePreview: {
+      collections: ['help-articles'],
+    },
   },
   collections: [Users, Media, HelpCategories, HelpArticles],
   editor: lexicalEditor({
