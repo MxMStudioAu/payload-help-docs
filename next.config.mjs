@@ -2,6 +2,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  devIndicators: false,
   // Allow any origin to fetch from the /api/help endpoint (used by client sites)
   async headers() {
     return [
