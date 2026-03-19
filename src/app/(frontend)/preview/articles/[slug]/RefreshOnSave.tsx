@@ -7,7 +7,7 @@ export default function RefreshOnSave() {
   const router = useRouter()
   return (
     <RefreshRouteOnSave
-      refresh={() => new Promise((resolve) => setTimeout(() => { window.location.reload(); resolve() }, 1500))}
+      refresh={() => new Promise<void>((resolve) => setTimeout(() => { window.location.reload(); resolve() }, 1500))}
       serverURL={process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}
     />
   )
