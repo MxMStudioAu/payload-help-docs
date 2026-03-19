@@ -39,6 +39,7 @@ rawDbUrl.searchParams.delete('channel_binding')
 const connectionString = rawDbUrl.toString()
 
 export default buildConfig({
+  cors: '*',
   admin: {
     user: Users.slug,
     importMap: {
