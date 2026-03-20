@@ -2,9 +2,10 @@ import type { CollectionConfig } from 'payload'
 
 export const HelpArticles: CollectionConfig = {
   slug: 'help-articles',
+  orderable: true,
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'order'],
+    defaultColumns: ['title', 'category'],
     livePreview: {
       url: ({ data }) =>
         `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/preview/articles/${data?.slug}`,
@@ -56,13 +57,19 @@ export const HelpArticles: CollectionConfig = {
       },
     },
     {
-      name: 'order',
-      type: 'number',
-      required: true,
-      defaultValue: 99,
+      name: 'helpRefs',
+      type: 'array',
       admin: {
-        description: 'Display order within the category — lower numbers appear first',
+        description:
+          'Tooltip reference keys — used to link this article to "?" icons in the client admin. Use a section.field pattern, e.g. gallery.sortOrder, media.photoEditor',
       },
+      fields: [
+        {
+          name: 'ref',
+          type: 'text',
+          required: true,
+        },
+      ],
     },
     {
       name: 'body',

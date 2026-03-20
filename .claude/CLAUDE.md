@@ -58,6 +58,7 @@ The endpoint shape:
         "slug": "how-to-log-in",
         "excerpt": "...",
         "order": 1,
+        "helpRefs": ["dashboard.login", "gettingStarted.overview"], // flat string array
         "body": { ... } // Lexical JSON
       }
     ]
@@ -95,12 +96,133 @@ Category slugs used for tier gating in the template (don't change these):
 
 ## Current Status
 
-- [ ] Scaffold fresh Payload project (`create-payload-app`)
-- [ ] Create `HelpCategories` collection
-- [ ] Create `HelpArticles` collection
-- [ ] Create public API endpoint returning categories + nested articles
-- [ ] Deploy to Vercel
-- [ ] Migrate content from Sanity (22 articles across 8 categories)
-- [ ] Update `payload-template` to fetch from this project instead of Sanity
-- [ ] Test end-to-end on a client site
-- [ ] Retire Sanity project
+- [x] Scaffold fresh Payload project (`create-payload-app`)
+- [x] Create `HelpCategories` collection
+- [x] Create `HelpArticles` collection
+- [x] Create public API endpoint returning categories + nested articles
+- [x] Deploy to Vercel
+- [x] Migrate content from Sanity (22 articles across 8 categories)
+- [x] Update `payload-template` to fetch from this project instead of Sanity
+- [x] Test end-to-end on a client site
+- [x] Retire Sanity project
+- [x] Add `helpRefs` field to HelpArticles (for future tooltip integration in the template)
+
+---
+
+## Help Doc Content Plan
+
+> **Remove this section once all articles are written.**
+>
+> Articles written before many features existed and need rewriting are marked with ✏️. Brand new articles are unmarked. Tick each one off as it's done.
+>
+> **Tone guide:** Short sentences. Practical. Tells the client *why*, not just *how*. Doesn't assume CMS knowledge but doesn't talk down to them either. See the "How to reorder your gallery" example written in the March 2026 session as a style reference.
+>
+> **helpRefs:** When writing each article, add ref keys to the Help References field using a `section.thing` pattern (e.g. `gallery.sortOrder`, `media.photoEditor`). These are used later to wire up contextual tooltips in the admin. You decide what makes sense — one article can have multiple refs.
+>
+> **Workflow:** Articles are written as Word docs and saved into this project folder (`payload-help-docs/`). Each doc contains all articles for one category, with title, slug, excerpt, category, order, body, and helpRef suggestions. Michelle copies the content into the Payload admin. Once a category is confirmed entered, tick off the articles below and move to the next category.
+>
+> **Note on entering content:** Article body content uses headings and bullet lists — use the toolbar in the Lexical editor (the T button for headings, the list button for bullets). Don't use the slash command menu; it has a bug where the trigger text ends up inside the heading.
+
+### Getting Started
+**Status: ✅ Word doc written — `help-docs-getting-started.docx` saved in project folder. Waiting for Michelle to confirm articles have been entered in Payload before ticking off.**
+
+**Difficulties encountered (March 2026 session):**
+- Lexical editor slash commands (`/heading`) leave the trigger text inside the heading block — workaround is to use the toolbar instead
+- The Ctrl+A shortcut only selects within a single block, not the whole editor — clearing the editor required a JavaScript workaround via the browser console
+- Category Save button sometimes needed 2–3 clicks to register
+- Slug field doesn't always auto-generate from the title — may need to be typed manually
+- Note: Article 35 in the admin ("Understanding draft vs published") has malformed body content from an earlier attempt — replace the body completely when entering from the Word doc
+
+- [ ] ✏️ How to log in and find your way around
+- [ ] ✏️ How to save and publish changes
+- [ ] ✏️ Understanding draft vs published — and why the list says "Published" even when you have unsaved changes
+- [ ] Understanding your plan — why some features aren't visible
+- [ ] The visible toggle — hiding content without deleting it
+- [ ] Marking content as featured
+- [ ] Scheduling content to publish at a future date
+- [ ] How to preview your site before publishing (Live Preview)
+- [ ] How versions work — viewing and restoring older saves
+
+### Your Dashboard *(new category)*
+- [ ] Understanding your dashboard — what everything means at a glance
+- [ ] The site progress bar — how your setup score is calculated
+- [ ] Site Health — what essentials, recommended, and suggestions mean
+- [ ] Search Readiness — understanding your SEO check results
+- [ ] The Unpublished Drafts card
+- [ ] Quick Actions — what each card does
+- [ ] Site Views — understanding your visitor analytics
+
+### Site Manager *(new category)*
+- [ ] Overview of the Site Manager
+- [ ] Setting up your header navigation (including dropdowns)
+- [ ] Setting up your footer navigation
+- [ ] Setting up and managing redirects
+- [ ] Creating contact forms and viewing submissions
+- [ ] Adding and managing admin users
+- [ ] User roles — what admin, editor, and viewer can do
+- [ ] Permissions — locking down layouts and navigation
+- [ ] Toggling content features on and off (Features tab)
+
+### Media & Images *(new category)*
+- [ ] Uploading images — file types, sizes, and what happens on upload
+- [ ] Browsing and organising your media library
+- [ ] Media categories and tags — keeping things tidy
+- [ ] Writing good alt text (and why it matters)
+- [ ] SEO filenames — what they are and why they help
+- [ ] Captions — where they appear on the site
+- [ ] Setting a focal point — how it affects image cropping
+- [ ] Using the Photo Editor — rotation, brightness, contrast, and filters
+
+### AI Writing Assistant *(new category)*
+- [ ] What the AI writing assistant can do
+- [ ] How your brand voice settings shape AI suggestions
+- [ ] Using AI on meta titles and descriptions
+- [ ] Using AI on alt text and SEO filenames
+- [ ] Tips for getting better results — when to accept, edit, or try again
+
+### Testimonials
+- [ ] ✏️ Adding and editing testimonials
+- [ ] ✏️ Star ratings and how they appear on the site
+- [ ] Marking a testimonial as featured
+- [ ] Hiding a testimonial without deleting it (visible toggle)
+
+### Blog *(tier-gated — slug: `blog`)*
+- [ ] ✏️ Writing and publishing a blog post
+- [ ] ✏️ Adding a hero image to a post
+- [ ] ✏️ Blog categories — setting them up and assigning posts
+- [ ] Adding related posts
+- [ ] Marking a post as featured
+- [ ] Hiding a post without deleting it (visible toggle)
+
+### Shop *(tier-gated — slug: `shop`)*
+- [ ] ✏️ Adding and editing shop items
+- [ ] ✏️ Shop categories
+- [ ] Controlling display order
+- [ ] Marking an item as featured
+- [ ] Hiding an item without deleting it (visible toggle)
+
+### Menu *(tier-gated — slug: `menu`)*
+- [ ] ✏️ Adding and editing menu items
+- [ ] ✏️ Menu categories
+- [ ] Controlling display order
+- [ ] Marking an item as featured
+- [ ] Hiding an item without deleting it (visible toggle)
+
+### Gallery *(tier-gated — slug: `gallery`)*
+- [ ] ✏️ Adding images to your gallery
+- [ ] ✏️ Gallery categories
+- [ ] Controlling display order
+- [ ] Marking an image as featured
+- [ ] Hiding an image without deleting it (visible toggle)
+
+### Pages & SEO *(tier-gated — slug: `pages-and-seo`)*
+- [ ] ✏️ Editing your homepage
+- [ ] ✏️ Writing good meta titles and descriptions
+- [ ] Hero options — choosing image, heading, subheading, buttons, and size
+- [ ] Adding and arranging content blocks
+- [ ] Block styling — background colours, images, overlays, and padding
+- [ ] Scroll animations — choosing how blocks appear on screen
+- [ ] SEO share images — what they are and how they look on social media
+- [ ] Creating new pages (full tier)
+- [ ] Managing navigation (full tier)
+- [ ] Setting up redirects (full tier)
