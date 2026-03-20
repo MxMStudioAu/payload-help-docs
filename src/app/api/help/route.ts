@@ -50,6 +50,7 @@ export const GET = async () => {
           slug: article.slug,
           excerpt: article.excerpt,
           order: article.order,
+          helpRefs: (article.helpRefs as Array<{ ref: string }> | undefined)?.map((r) => r.ref) ?? [],
           body: article.body,
         })),
       }

@@ -65,6 +65,21 @@ export const HelpArticles: CollectionConfig = {
       },
     },
     {
+      name: 'helpRefs',
+      type: 'array',
+      admin: {
+        description:
+          'Tooltip reference keys — used to link this article to "?" icons in the client admin. Use a section.field pattern, e.g. gallery.sortOrder, media.photoEditor',
+      },
+      fields: [
+        {
+          name: 'ref',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
       name: 'body',
       type: 'richText',
     },

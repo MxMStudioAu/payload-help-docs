@@ -210,6 +210,12 @@ export interface HelpArticle {
    * Display order within the category — lower numbers appear first
    */
   order: number;
+  helpRefs?:
+    | {
+        ref: string;
+        id?: string | null;
+      }[]
+    | null;
   body?: {
     root: {
       type: string;
