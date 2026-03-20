@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const HelpCategories: CollectionConfig = {
   slug: 'help-categories',
+  orderable: true,
   admin: {
     useAsTitle: 'title',
   },
@@ -41,12 +42,13 @@ export const HelpCategories: CollectionConfig = {
       },
     },
     {
-      name: 'order',
-      type: 'number',
-      required: true,
-      defaultValue: 99,
+      name: 'articles',
+      type: 'join',
+      collection: 'help-articles',
+      on: 'category',
       admin: {
-        description: 'Display order — lower numbers appear first',
+        description: 'Articles in this category',
+        defaultColumns: ['title'],
       },
     },
   ],

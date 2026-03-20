@@ -2,9 +2,10 @@ import type { CollectionConfig } from 'payload'
 
 export const HelpArticles: CollectionConfig = {
   slug: 'help-articles',
+  orderable: true,
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'order'],
+    defaultColumns: ['title', 'category'],
     livePreview: {
       url: ({ data }) =>
         `${process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'}/preview/articles/${data?.slug}`,
@@ -53,15 +54,6 @@ export const HelpArticles: CollectionConfig = {
       required: true,
       admin: {
         description: 'The category this article belongs to',
-      },
-    },
-    {
-      name: 'order',
-      type: 'number',
-      required: true,
-      defaultValue: 99,
-      admin: {
-        description: 'Display order within the category — lower numbers appear first',
       },
     },
     {

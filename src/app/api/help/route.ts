@@ -15,15 +15,15 @@ export const OPTIONS = async () => {
 export const GET = async () => {
   const payload = await getPayload({ config: configPromise })
 
-  // Fetch all categories sorted by order
+  // Fetch all categories in drag-drop order
   const categoriesResult = await payload.find({
     collection: 'help-categories',
-    sort: 'order',
+    sort: '_order',
     limit: 100,
     overrideAccess: true,
   })
 
-  // For each category, fetch its articles sorted by order
+  // For each category, fetch its articles in drag-drop order
   const categoriesWithArticles = await Promise.all(
     categoriesResult.docs.map(async (category) => {
       const articlesResult = await payload.find({
@@ -33,7 +33,7 @@ export const GET = async () => {
             equals: category.id,
           },
         },
-        sort: 'order',
+        sort: '_order',
         limit: 100,
         overrideAccess: true,
       })
@@ -43,13 +43,11 @@ export const GET = async () => {
         title: category.title,
         slug: category.slug,
         description: category.description,
-        order: category.order,
         articles: articlesResult.docs.map((article) => ({
           id: article.id,
           title: article.title,
           slug: article.slug,
           excerpt: article.excerpt,
-          order: article.order,
           helpRefs: (article.helpRefs as Array<{ ref: string }> | undefined)?.map((r) => r.ref) ?? [],
           body: article.body,
         })),

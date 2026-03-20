@@ -76,7 +76,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'help-categories': {
+      articles: 'help-articles';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -171,6 +175,7 @@ export interface Media {
  */
 export interface HelpCategory {
   id: number;
+  _order?: string | null;
   title: string;
   /**
    * Auto-generated from title — only change if you know what you're doing (client tier gating depends on these slugs)
@@ -181,9 +186,13 @@ export interface HelpCategory {
    */
   description?: string | null;
   /**
-   * Display order — lower numbers appear first
+   * Articles in this category
    */
-  order: number;
+  articles?: {
+    docs?: (number | HelpArticle)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -193,6 +202,7 @@ export interface HelpCategory {
  */
 export interface HelpArticle {
   id: number;
+  _order?: string | null;
   title: string;
   /**
    * Auto-generated from title
@@ -207,9 +217,8 @@ export interface HelpArticle {
    */
   category: number | HelpCategory;
   /**
-   * Display order within the category — lower numbers appear first
+   * Tooltip reference keys — used to link this article to "?" icons in the client admin. Use a section.field pattern, e.g. gallery.sortOrder, media.photoEditor
    */
-  order: number;
   helpRefs?:
     | {
         ref: string;
@@ -361,10 +370,11 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "help-categories_select".
  */
 export interface HelpCategoriesSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   slug?: T;
   description?: T;
-  order?: T;
+  articles?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -373,11 +383,17 @@ export interface HelpCategoriesSelect<T extends boolean = true> {
  * via the `definition` "help-articles_select".
  */
 export interface HelpArticlesSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   slug?: T;
   excerpt?: T;
   category?: T;
-  order?: T;
+  helpRefs?:
+    | T
+    | {
+        ref?: T;
+        id?: T;
+      };
   body?: T;
   updatedAt?: T;
   createdAt?: T;
